@@ -79,7 +79,7 @@ setup_bblayers_conf() {
 sed "/  \"/d" $PROJECT_DIR/conf/bblayers.conf > $PROJECT_DIR/conf/bblayers.conf~
 mv $PROJECT_DIR/conf/bblayers.conf~ $PROJECT_DIR/conf/bblayers.conf
 
-for meta_layer in meta-beagleboard
+for meta_layer in meta-$machine
 do
 if [ -e $METADATA_DIR/$meta_layer ]; then
 	META_LAYER_PATH="$METADATA_DIR/$meta_layer"
