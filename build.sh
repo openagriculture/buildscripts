@@ -79,13 +79,14 @@ setup_bblayers_conf() {
 sed "/  \"/d" $PROJECT_DIR/conf/bblayers.conf > $PROJECT_DIR/conf/bblayers.conf~
 mv $PROJECT_DIR/conf/bblayers.conf~ $PROJECT_DIR/conf/bblayers.conf
 
-for meta_layer in meta-$machine
+while read line
 do
+	meta_layer=$line
 if [ -e $METADATA_DIR/$meta_layer ]; then
 	META_LAYER_PATH="$METADATA_DIR/$meta_layer"
 	echo "  $META_LAYER_PATH \\" >> $PROJECT_DIR/conf/bblayers.conf
 fi
-done
+done < meta-layers
 
 echo "  \"" >> conf/bblayers.conf
 }
