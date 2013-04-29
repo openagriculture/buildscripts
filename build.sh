@@ -64,7 +64,7 @@ clean_up() {
 }
 
 setup_local_conf() {
-cat > $PROJECT_DIR/conf/local.conf <<_EOF
+cat >> $PROJECT_DIR/conf/local.conf <<_EOF
 MACHINE = "$machine"
 DISTRO = "poky"
 # Parallelism Options
