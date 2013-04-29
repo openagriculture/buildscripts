@@ -66,7 +66,7 @@ clean_up() {
 setup_local_conf() {
 cat > $PROJECT_DIR/conf/local.conf <<_EOF
 MACHINE = "$machine"
-DISTRO = "aceyoco"
+DISTRO = "poky"
 # Parallelism Options
 BB_NUMBER_THREADS = "$THREADS"
 PARALLEL_MAKE = "-j $JOBS"
