@@ -21,6 +21,7 @@
 
 
 datetime=$(date +%d%m%y-%I%M)
+buildscripts_dir=$PWD
 
 install_repo() {
 	if [ -f ~/bin/repo ]
@@ -70,6 +71,7 @@ DISTRO = "poky"
 # Parallelism Options
 BB_NUMBER_THREADS = "$THREADS"
 PARALLEL_MAKE = "-j $JOBS"
+PACKAGE_CLASSES = "package_ipk"
 DL_DIR = "$PROJECT_DIR/../sources"
 SSTATE_DIR = "$PROJECT_DIR/../sstate-cache"
 _EOF
@@ -86,9 +88,24 @@ if [ -e $METADATA_DIR/$meta_layer ]; then
 	META_LAYER_PATH="$METADATA_DIR/$meta_layer"
 	echo "  $META_LAYER_PATH \\" >> $PROJECT_DIR/conf/bblayers.conf
 fi
-done < meta-layers
+done < $buildscripts_dir/meta-layers
 
 echo "  \"" >> conf/bblayers.conf
+}
+
+
+check_local_sources() {
+while read line
+do
+external_sources_dir=$line
+if [ -d $external_sources_dir ]; then
+cat >> $PROJECT_DIR/conf/local.conf <<_EOF
+SOURCE_MIRROR_URL = "file://$external_sources_dir
+INHERIT += "own-mirrors"
+BB_GENERATE_MIRROR_TARBALLS = "1"
+_EOF
+fi
+done < $buildscripts_dir/external/sources
 }
 
 initialize_vars() {
@@ -164,4 +181,5 @@ initialize_vars
 download_metadata
 set_environments
 setup_local_conf
+check_local_sources
 setup_bblayers_conf
