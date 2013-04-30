@@ -71,6 +71,7 @@ DISTRO = "poky"
 # Parallelism Options
 BB_NUMBER_THREADS = "$THREADS"
 PARALLEL_MAKE = "-j $JOBS"
+PACKAGE_CLASSES = "package_ipk"
 DL_DIR = "$PROJECT_DIR/../sources"
 SSTATE_DIR = "$PROJECT_DIR/../sstate-cache"
 _EOF
