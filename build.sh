@@ -37,7 +37,7 @@ install_repo() {
 
 download_metadata() {
 	cd $build_dir
-	~/bin/repo init -u https://github.com/shivdasgujare/manifest.git -b $machine
+	~/bin/repo init -u https://github.com/openagriculture/manifest.git -b $machine
 	~/bin/repo sync
 }
 
@@ -67,7 +67,7 @@ clean_up() {
 setup_local_conf() {
 cat >> $PROJECT_DIR/conf/local.conf <<_EOF
 MACHINE = "$machine"
-DISTRO = "poky"
+DISTRO = "anar"
 # Parallelism Options
 BB_NUMBER_THREADS = "$THREADS"
 PARALLEL_MAKE = "-j $JOBS"
