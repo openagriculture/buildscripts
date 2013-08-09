@@ -44,7 +44,7 @@ download_metadata() {
 usage() {
 # Help Screen
 echo ""
-echo "Usage: sh build.sh -m <machine>"
+echo "Usage: source build.sh -m <machine>"
 echo ""
 echo ""
 echo "The <machine> argument can be one of the following"
